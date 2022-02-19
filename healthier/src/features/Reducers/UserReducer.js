@@ -1,4 +1,4 @@
-import { LOGIN } from '../Types'
+import { LOGIN,LOGOUT,REGISTER } from '../Types'
 const LocalStorage = JSON.parse(window.localStorage.getItem('UserInfo'));
 const initialState = (LocalStorage)?{...LocalStorage}:{
     Parameters: {
@@ -29,6 +29,18 @@ export default function (state = initialState, action) {
                 ...state.LocalStorage,
                 UserData: action.payload,
                 Parameters: { Logged: true }
+            }
+        case LOGOUT:
+            return {
+                ...state.LocalStorage,
+                UserData:'',
+                Parameters:{Logged: false}
+            }
+        case REGISTER:
+            return{
+                ...state.LocalStorage,
+                UserData:action.payload,
+                Parameters:{Logged:true}
             }
         default: return state
     }

@@ -1,5 +1,5 @@
 import { useState,useEffect } from 'react'
-import { LoginAction } from '../../../features/Actions/UserActions'
+import { RegisterAction } from '../../../features/Actions/UserActions'
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
@@ -7,35 +7,48 @@ function Register() {
     let navigate = useNavigate();
     const Logged = useSelector(state => state.UserReducer.Parameters.Logged)
     const [Email, setEmail] = useState('')
-    const [firstName, setFirstname] = useState('')
-    const [lastName, setLastname] = useState('')
-    const [userName, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [birthDate, setbirthDate] = useState('')
+    const [Firstname, setFirstname] = useState('')
+    const [Lastname, setLastname] = useState('')
+    const [Password, setPassword] = useState('')
+    const [ConfirmPassword, setConfirmPassword] = useState('')
+    const [BirthDate, setbirthDate] = useState('')
+    const UserData = useSelector(state => state.UserReducer)
+    const dispatch = useDispatch()
+    async function registerUser(event) {
+        event.preventDefault()
+        const loadData = async () => {
+            await dispatch(RegisterAction(Email, Password, Firstname,Lastname,BirthDate))
+        }
+        loadData(Email, Password, Firstname,Lastname,BirthDate)
+        }
+    useEffect(()=>{
+        if (Logged) {
+            localStorage.setItem('UserInfo', JSON.stringify(UserData))
+            navigate('/doctors')
+    }},[Logged])
 
     return (
         <div className='w-screen  h-screen absolute z-10 bg-gray-900'>
             <div className='flex text-center  justify-center z-4 items-center bg-[url(https://img.search.brave.com/HH3aOagNXk_Z-Gywvu0DbYbkA4rDCB_eGq0cnIXVo5M/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9vbmxp/bmVudXRyaXRpb24u/Y25zLnV0ZXhhcy5l/ZHUvd3AtY29udGVu/dC91cGxvYWRzLzIw/MTgvMTEvR2V0dHlJ/bWFnZXMtODIzNzY3/MTI4X2hpZ2gtMS5q/cGc)] bg-no-repeat bg-cover w-screen h-screen'>
                 <div className='w-96 z-4 bg-gradient-to-r from-blue-200 to-cyan-500 mt-36 pt-10 border-3 rounded-xl -translate-y-10 m-10'>
-                    <form onSubmit={Register}>
+                    <form onSubmit={registerUser}>
                         <div className='pt-3'>
-                            <label htmlFor="firstName" className="sr-only">firstName</label>
+                            <label htmlFor="firstName" className="sr-only">First Name</label>
                             <input
-                                value={firstName}
+                                value={Firstname}
                                 onChange={(e) => setFirstname(e.target.value)}
                                 type="firstName"
-                                placeholder="firstName"
+                                placeholder="First Name"
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             />
                         </div>
                         <div className='pt-3'>
-                            <label htmlFor="lastName" className="sr-only">lastName</label>
+                            <label htmlFor="lastName" className="sr-only">Last Name</label>
                             <input
-                                value={lastName}
+                                value={Lastname}
                                 onChange={(e) => setLastname(e.target.value)}
                                 type="lastName"
-                                placeholder="lastName"
+                                placeholder="Last Name"
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             />
                         </div>
@@ -52,7 +65,7 @@ function Register() {
                         <div className='pt-3'>
                             <label htmlFor="password" className="sr-only">Password</label>
                             <input
-                                value={password}
+                                value={Password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 type="Password"
                                 placeholder="Password"
@@ -62,17 +75,17 @@ function Register() {
                         <div className='pt-3'>
                             <label htmlFor="confirmPassword" className="sr-only">Confirm Password</label>
                             <input
-                                value={confirmPassword}
+                                value={ConfirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 type="Password"
-                                placeholder="Password"
+                                placeholder=" Confirm Password"
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             />
                         </div>
                         <div className='pt-3'>
-                            <label htmlFor="birthDate" className="sr-only">Birth Date</label>
+                            <label htmlFor="BirthDate" className="sr-only">Birth Date</label>
                             <input
-                                value={birthDate}
+                                value={BirthDate}
                                 onChange={(e) => setbirthDate(e.target.value)}
                                 type="Date"
                                 placeholder="BirthDate"

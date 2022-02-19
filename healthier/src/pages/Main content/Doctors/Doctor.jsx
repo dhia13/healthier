@@ -35,31 +35,48 @@ const Doctor = () => {
     console.log(doctor)
     return (
         <div>
-            <Navigation />
-            <div className="dark:bg-UiDarkBg block">
-                <div className="max-w-2xl mx-auto">
-                    <div className="w-full">
-                        <div className="w-full h-72 rounded-t-lg">
-                            <img className='h-72 w-full' src='https://www.contractorcalculator.co.uk/common/images/doctor-heart.jpg' /></div>
-                        <div className="absolute -mt-20 ml-5 flex">
-                            <div className="border border-gray500 h-36 w-36 rounded-lg flex justify-center items-center">
-                                <img className='h-36 w-36 rounded-lg border-gray500 shadow-md' src={doctor.imageLink} />
-                            </div>
-                            <div className="my-24 border border-gray500 h-12 w-64 dark:text-UiDarkText"><p className='ml-2 text-4xl'>{doctor.Name}</p></div>
+            <div className='dark:bg-UiDarkBg'>
+                <div className='fixed w-full z-30'>
+                    <Navigation />
+                </div>
+                {/* Doctor Hero Section */}
+                <div className='-translate-y-32 w-full dark:bg-ProfilebgBlack'>
+                    {/* 1st Part */}
+                    <div className='h-3/5 dark:bg-ProfilebgBlack w-4/6 mx-auto relative' >
+                        {/* Cover Pic */}
+                        <div className='w-full h-full'>
+                            <img className='mx-auto object-cover w-full h-full rounded-md' src='https://www.irishtimes.com/polopoly_fs/1.2654014.1463688367!/image/image.jpg_gen/derivatives/box_620_330/image.jpg'>
+                            </img>
                         </div>
+                    </div>
+                    {/* 2nd Part*/}
+                    <div className=' w-4/6 h-1/5 mx-auto dark:bg-ProfilebgBlack px-10 border-b-2 border-UiDarkText'>
+                        {/* Profile Pic with edit picture Button */}
+                        <div className='flex items-center justify-between '>
+                            <div className='flex justify-center items-center'>
+                                <div className='relative -translate-y-20'>
+                                    <img src={doctor.imageLink} className='w-44 h-64 rounded-lg' />
+                                </div>
+                                <div className='flex flex-col'>
+                                    <p className='ml-5 font-extrabold text-3xl text-UiDarkBg dark:text-UiDarkText'>{doctor.Name}</p>
+                                    <p className='ml-5 font-bold text-xl text-UiDarkBg dark:text-UiDarkText'>Followers : 300 </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    </div>
-                    <div className="border border-gray500 rounded-b-lg p-5 pt-20 flex flex-col">
-                        <div className="mb-1 border border-gray500 h-7 w-auto dark:text-UiDarkText"><p className='ml-2'>Branche : {doctor.Branche}</p></div>
-                        <div className="mb-1 border border-gray500 h-7 w-auto dark:text-UiDarkText"><p className='ml-2'>Commune : {doctor.Commune}</p></div>
-                        <div className="mb-1 border border-gray500 h-7 w-auto dark:text-UiDarkText"><p className='ml-2'>Adress : {doctor.Adress}</p></div>
-                        <div className="mb-1 border border-gray500 h-7 w-auto dark:text-UiDarkText"><p className='ml-2'>Studies : {doctor.Studies}</p></div>
-                        <div className="mb-1 border border-gray500 h-7 w-auto dark:text-UiDarkText"><p className='ml-2'>Phone Number : {doctor.PhoneNumber}</p></div>
-                        <div className="mb-1 border border-gray500 h-7 w-auto dark:text-UiDarkText"><p className='ml-2'>Location : {doctor.Location}</p></div>
-                    </div>
-                    <div className="py-5 break-all bbcode">
-                    <div className="mb-1 border border-gray500 h-7 w-32 dark:text-UiDarkText"><p className='ml-4'>About</p></div>
-                        <div className="mb-1 border border-gray500 w-full h-40"></div>
+                    {/* Doctor About Section */}
+                    <div className='dark:bg-UiDarkBg text-xl w-6/6 text-UiDarkBg dark:text-UiDarkText mx-auto'>
+                        <div className='w-3/6 mx-auto'>
+                            <p className='text-center my-2'>Informations</p>
+                            <p className='my-2'>Branche : {doctor.Branche}</p>
+                            <p className='my-2'>Commune : {doctor.Commune}</p>
+                            <p className='my-2'>Adress : {doctor.Adress}</p>
+                            <p className='my-2'>Age : {doctor.Age}</p>
+                            <p className='my-2'>Studies : {doctor.Studies}</p>
+                            <p className='my-2'>Phone Number : {doctor.PhoneNumber}</p>
+                            <p className='mt-2'>GPS Location : {doctor.Location}</p>
+                        </div>
                     </div>
                 </div>
             </div>
