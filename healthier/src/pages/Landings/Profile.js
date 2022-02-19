@@ -1,5 +1,6 @@
 import Navigation from '../../Components/Nav'
 import { useSelector } from 'react-redux'
+import UserImg from '../../Assets/User-avatar.svg'
 
 function Profile() {
     const MyData = useSelector(state => state.UserReducer.UserData)
@@ -19,7 +20,7 @@ function Profile() {
                         </img>
                     </div>
                     <div className='absolute right-10 bottom-3 '>
-                        <button className="bg-UiDarkText hover:bg-gray500 text-sm font-semibold py-1 px-2 rounded flex">
+                        <button className="bg-UiDarkText  hover:bg-gray500 text-sm font-semibold py-1 px-2 rounded flex">
                             <div className='w-5 h-5'>
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                                     viewBox="0 0 297 297" >
@@ -56,7 +57,7 @@ function Profile() {
                     <div className='flex items-center justify-between'>
                         <div className='flex justify-center items-center'>
                                 <div className='relative -translate-y-4'>
-                                    <img src={MyData.ImageLink} className='w-36 h-36 rounded-full' />
+                                    <img src={MyData.ImageLink?MyData.ImageLink:UserImg} className='w-36 h-36 rounded-full border-UiDarkBg border' />
                                     <div className='absolute h-10 w-10 bottom-2 -right-2  bg-buttonDark hover:bg-gray500 cursor-pointer rounded-full' >
                                         <svg className='w-5 h-5 translate-x-1/2 translate-y-1/2 text-UiDarkText' xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                                             viewBox="0 0 297 297" >
@@ -83,8 +84,8 @@ function Profile() {
                                     </div>
                                 </div>
                             <div className='flex flex-col'>
-                                <p className='ml-5 font-extrabold text-3xl text-UiDarkText'>{MyData.Firstname} {MyData.Lastname}</p>
-                                <p className='ml-5 font-bold text-xl text-UiDarkText'>Followers : 300 </p>
+                                <p className='ml-5 font-extrabold text-3xl text-UiDarkBg dark:text-UiDarkText'>{MyData.Firstname} {MyData.Lastname}</p>
+                                <p className='ml-5 font-bold text-xl text-UiDarkBg dark:text-UiDarkText'>Followers : 300 </p>
                             </div>
                         </div>
                         <div>
@@ -95,9 +96,9 @@ function Profile() {
                     </div>
                 </div>
                 {/* 3rd Part */}
-                <div className='flex justify-around mx-auto mb-2 items-center dark:bg-ProfilebgBlack text-UiDarkText text-lg font-bold w-4/6'>
+                <div className='flex justify-around mx-auto mb-2 items-center dark:bg-ProfilebgBlack text-UiDarkBg dark:text-UiDarkText text-lg font-bold w-4/6'>
                     <p className='text-red border-b border-red mb-1 cursor-pointer'>About</p>
-                    <p className='cursor-pointer mb-1'>Favorite Doctors</p>
+                    <p className='cursor-pointer mb-1 text-UiDarkBg'>Favorite Doctors</p>
                 </div>
             </div>
             {/* Profile Main Content Section */}

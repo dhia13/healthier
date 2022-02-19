@@ -39,7 +39,6 @@ function Doctors() {
             {/* <Filtration> */}
             <div className='flex'>
             <FilterListByCommune/>
-            <FilterListByBranche />
             </div>
             {/* Commune */}
             <div>

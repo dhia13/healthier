@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
+import { LogoutAction } from '../features/Actions/UserActions'
 import {useState} from 'react'
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import {ChangeSearchWord} from '../features/Actions/InterfaceActions'
+import UserImg from '../Assets/User-avatar.svg'
 
 function Navigation() {
     const [Menu,setMenu]=useState({"Menu":'items-center md:flex hidden','open':false})
@@ -23,7 +25,10 @@ function Navigation() {
     setMenu({'Menu':'items-center md:flex hidden','open':false})
 }
 const UserData = useSelector(state=>state.UserReducer.UserData)
-
+function Logout(){
+    localStorage.clear()
+    dispatch(LogoutAction(''))
+}
     return(
             <nav className="dark:bg-UiDarkNavigation z-10 shadow-lg">
                 <div className="container px-6 py-3 mx-auto">
@@ -35,13 +40,13 @@ const UserData = useSelector(state=>state.UserReducer.UserData)
                                 <div className="hidden mx-10 md:block">
                                     <div className="relative">
                                         <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                            <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none">
+                                            <svg className="w-5 h-5 text-gray500" viewBox="0 0 24 24" fill="none">
                                                 <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
                                             </svg>
                                         </span>
                                         <input type="text" value={search} 
                                         onChange={(e) => setSearch(e.target.value)}
-                                        className="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-UiDarkText dark:border-gray-600 focus:border-green-400 dark:focus:border-green-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-green-300" placeholder="Search">
+                                        className="w-full py-2 pl-10 pr-4 rounded-3xl dark:bg-SearchBg dark:text-UiDarkText focus:outline-none " placeholder="Search">
                                         </input>
                                     </div>
                                 </div>
@@ -58,22 +63,20 @@ const UserData = useSelector(state=>state.UserReducer.UserData)
                         {/* <!-- Mobile Menu open: "block", Menu closed: "hidden" --> */}
                         <div className={Menu.Menu}>
                             <div className="flex flex-col mt-2 md:flex-row md:mt-0 md:mx-1">
-                                <Link className="my-1 text-sm text-white leading-5 transition-colors duration-200 transform dark:text-UiDarkText hover:text-green-500 dark:hover:text-green-400 hover:underline md:mx-4 md:my-0" to="/">Home</Link>
                                 <Link className="my-1 text-sm leading-5 text-white transition-colors duration-200 transform dark:text-UiDarkText  hover:text-green-500 dark:hover:text-green-400 hover:underline md:mx-4 md:my-0" to='/doctors'>Doctors</Link>
                                 <Link className="my-1 text-sm leading-5 text-white transition-colors duration-200 transform dark:text-UiDarkText hover:text-green-500 dark:hover:text-green-400 hover:underline md:mx-4 md:my-0" to="/pharmacies">Pharmacies</Link>
-                                <Link className="my-1 text-sm leading-5 text-white transition-colors duration-200 transform dark:text-UiDarkText hover:text-green-500 dark:hover:text-green-400 hover:underline md:mx-4 md:my-0" to="/blogs">Blogs</Link>
                             </div>
                             {/* change login/signup with account avatar */}
                             <div>
                                 <div className='relative'>
                                     {/* //userMenu */}
-                                    <img src={UserData.ImageLink} className='w-8' onClick={toggleUserMenu}/>
+                                    <img src={UserData.ImageLink?UserData.ImageLink:UserImg} className='w-8 border-UiDarkBg border rounded-full cursor-pointer' onClick={toggleUserMenu}/>
                                     <div className={userMenu}>
                                     <div className='flex flex-col dark:bg-UiDarkNavigation rounded-lg opacity-75 absolute dark:text-UiDarkText w-52 h-62 justify-center items-center right-0 top-5'>
                                     <Link to='/Profile' className='w-full text-center'>
                                         <p className='text-2xl font-extrabold my-5 '>Profile</p></Link>
                                         <p className='text-2xl font-extrabold my-5'>Settings</p>
-                                     <Link to='/login' className='hover:bg-slate-600 w-full text-center'><p className='text-2xl font-extrabold my-5'>Logout</p></Link>   
+                                     <Link to='/login' className='hover:bg-slate-600 w-full text-center' onClick={Logout}><p className='text-2xl font-extrabold my-5'>Logout</p></Link>   
                                     </div>
                                     </div>
                                 </div>
